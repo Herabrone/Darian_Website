@@ -1,0 +1,113 @@
+body{
+
+    /* all other elements will inheret these properties */
+    font-family: sans-serif;
+
+}
+
+.main-header{
+    background-color: #f7f7f7;
+
+    padding:20px
+    
+}
+
+aside{
+    background-color: #f7f7f7;
+    border-top: 5px solid #1098ad;
+    border-bottom: 5px solid #1098ad;
+}
+
+
+h1,h2,h3,p,li{
+    font-family: sans-serif;
+    color: #444;
+}
+
+
+h1 {
+    
+    color:#1098ad;
+   
+
+    font-size: 36px;
+    text-transform: uppercase;
+    font-style: italic;
+    text-align: center;
+
+}
+
+h2 {
+    font-size: 25px;
+    color:#1098ad;
+}
+
+p{
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+
+li{
+    font-size: 16px;
+}
+
+
+/*Follows decendacy, ir get paragraphs that are only in the footer*/
+footer p{
+    font-size: 16px;
+}
+
+#author{
+    font-style: italic;
+    font-size: 16px;
+
+}
+
+#copyright{
+    font-size: 16px;
+}
+
+/* for classes */
+
+.related-stuff{
+    font-size: 18px;
+}
+
+/* to remove bullet points */
+
+ul{
+    list-style: none;
+}
+
+
+body {
+    /* background-color: ; */
+}
+
+/* creating a psudo-class */
+li:first-child{
+    font-weight: bold;
+}
+
+
+/* Styling hyperlinks */
+
+a:link{
+    color: #1098ad;
+    text-decoration: none;
+}
+
+a:visited{
+    color: #1098ad;
+}
+
+a:hover{
+    color: orangered;
+    font-weight: bold;
+    text-decoration: underline orangered;
+}
+/* 
+a:active{
+    background-color: black;
+} */
