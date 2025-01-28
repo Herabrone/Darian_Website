@@ -2,7 +2,16 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
+        <!--Internal CSS-->
+        <link href="style.css" rel="stylesheet"/>
+
+
         <title>The Darian Website</title>
+
+        
+
+        
+
     </head>
 
     <body>
@@ -14,15 +23,19 @@
         <h5>The basic of Ryan</h5>
         -->
 
-        <header>
-            <h1> This is the Darian Website</h1>
 
-            <nav>
+
+
+       
+        <header class="main-header">
+            <h1 > This is the Darian Website</h1>
+
+            <div>
                 <a href="blog.html">Blog</a>
                 <a href="#">PCs!</a>
                 <a href="#">More of Darian</a>
                 <a href="#">Top Page</a>
-            </nav>
+            </div>
         </header>
         
         
@@ -30,18 +43,23 @@
             <header>
 
                 <h2> A picture of Darian</h2>
-                <p>Posted by <strong>Darian</strong>  </p>
                 
-                <img src="Darian.JPG" alt="HTML code on screen" width="500"/>
+                
+                <img 
+                    src="img/Darian.JPG" 
+                    alt="HTML code on screen" 
+                    width="500"
+                />
+                <p id="author">Posted by <strong>Darian</strong>  </p>
 
             </header>
             
 
 
-            <p> Viewed by my <em>friends</em> </p>
+            <h2> Viewed by my <em>friends</em> </h2>
 
 
-            <h2>Heres a List of them</h2>
+            <p>Heres a List of them</p>
 
             <ol> <!--Ordered list-->
                 <li>Darian</li>
@@ -55,18 +73,53 @@
                 <li> Rando </li>
                 <li> Rando2 </li>
             </ul>
+           
 
+            <aside>
+
+                <h2> Related stuff</h2>
+                
+                <img
+                    src="img/Banff.JPG"
+                    alt="Image"
+                    width="150"
+                />
+                <p class ="related-stuff">Elisa and I on lake Louise</p>
+
+                <img
+                    src="img/Art.JPG"
+                    alt="Image"
+                    width="150"
+                />
+                
+               
+                <p class = "related-stuff"> Elisa and some art</p>
+
+                <img
+                    src="img/Bench.JPG"
+                    alt="Image"
+                    width="150"
+                />
+                <P class="related-stuff"> Me on a bench</P>
+    
+            </aside>
 
 
             <h2>Links</h2>
 
-            <a href="https://www.youtube.com/watch?v=uPIxsPw3MLQ&ab_channel=N3King">Click Me!</a>
-            <a href="https://www.youtube.com/watch?v=uPIxsPw3MLQ&ab_channel=N3King" target="_blank">New Tab link</a>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley">Click Me!</a>
+            <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0&ab_channel=Duran" target="_blank">Click me too please!</a>
 
         </article>
+
+
+        
         
         <footer>
-            Copyright &copy; 2027 by Darian 
+            <p id="copyright">
+                Copyright &copy; 2027 by Darian 
+            </p>
+            
         </footer>
     </body>
 </html>
