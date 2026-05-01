@@ -1,0 +1,80 @@
+---
+title: "Forecasting Engine"
+order: 2
+role: "Sole engineer"
+timeline: "2025 – present"
+status: "In progress"
+category: "ML / Forecasting"
+stack: ["Python", "NumPy", "Pandas", "PyTorch", "scikit-learn"]
+hero:
+  type: "image"
+  src: "/media/forecasting/hero.svg"
+  poster: "/media/forecasting/hero.svg"
+summary: "A from-scratch Holt-Winters additive triple exponential smoothing engine for SKU-level demand forecasting, with parameter tuning, batch inference, and an experimental ML residual-correction layer."
+ogDescription: "Holt-Winters demand forecasting with parameter tuning and ML residual layer."
+publishedAt: "2026-04-30"
+outcomes:
+  - { label: "Baseline RMSE", value: "1.00x", sub: "naive seasonal" }
+  - { label: "Holt-Winters", value: "0.71x", sub: "vs baseline" }
+  - { label: "+ ML residuals", value: "0.66x", sub: "long-tail SKUs" }
+  - { label: "Inference", value: "CPU-fast", sub: "batch over 3k SKUs" }
+---
+
+## Problem
+
+Stockman's reorder suggestions need a defensible demand model. Pulling a library off the shelf was tempting, but I wanted to know exactly what was happening inside the forecast — both because inventory decisions are real money, and because the moment something goes wrong I want to be able to point at a specific component.
+
+So I built it. Holt-Winters additive triple exponential smoothing, from scratch, with parameter tuning, holdout evaluation, and an optional ML residual-correction layer for the tail.
+
+## Architecture
+
+The model decomposes a series into level, trend, and seasonality, then projects forward.
+
+<CaseDiagram kind="forecasting" />
+
+$$
+\ell_t = \alpha(y_t - s_{t-m}) + (1-\alpha)(\ell_{t-1} + b_{t-1})
+$$
+
+$$
+b_t = \beta(\ell_t - \ell_{t-1}) + (1-\beta)\, b_{t-1}
+$$
+
+$$
+s_t = \gamma(y_t - \ell_{t-1} - b_{t-1}) + (1-\gamma)\, s_{t-m}
+$$
+
+$$
+\hat{y}_{t+h} = \ell_t + h\, b_t + s_{t+h-m}
+$$
+
+The pipeline is:
+
+<Steps>
+  <Step title="Seasonal period detection">
+    Spectral peak + autocorrelation cross-check; defaults to 7 if signals disagree.
+  </Step>
+  <Step title="Parameter optimization">
+    Grid search over α/β/γ, then L-BFGS refinement. Loss is RMSE on a rolling-origin holdout, not in-sample fit.
+  </Step>
+  <Step title="Batch inference">
+    Vectorized across SKUs. CPU is sufficient for inference; GPU only helped on the cross-product parameter sweep.
+  </Step>
+  <Step title="ML residual layer (experimental)">
+    A small gradient-boosted model on the residuals, with calendar and price features. Improves long-tail RMSE; off by default.
+  </Step>
+</Steps>
+
+## Evaluation
+
+Twelve-week holdout against a naive seasonal baseline. Metrics: MAE, RMSE, R². Holt-Winters wins; the residual layer adds a small but real lift on SKUs with sparse, lumpy demand.
+
+<Callout tone="warn" title="Honest caveat">
+  The ML residual layer is research-grade. It improves RMSE on long-tail SKUs but isn't in production yet — adding a model you can't explain to inventory decisions is a liability. The base Holt-Winters component is what Stockman uses today.
+</Callout>
+
+## What I'd do differently
+
+- Build the rolling-origin evaluator before the model. I built it second, and ate a few weeks of false positives.
+- Treat seasonal period detection as a first-class problem, not a heuristic. The places where the model was wrong were almost always places where the period was wrong.
+- Keep the residual layer in its own repo. It changes shape every two weeks; the base engine doesn't.

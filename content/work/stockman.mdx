@@ -1,0 +1,109 @@
+---
+title: "Stockman / En Login"
+order: 1
+role: "Sole engineer & designer"
+timeline: "2024 – present"
+status: "Shipped"
+category: "Full-stack"
+stack: ["React", "Spring Boot", "MySQL", "Docker", "MCP", "TypeScript", "Java"]
+links:
+  github: "https://github.com/Herabrone/stockman"
+hero:
+  type: "image"
+  src: "/media/stockman/hero.svg"
+  poster: "/media/stockman/hero.svg"
+summary: "A full-stack inventory + decision-support SaaS with an LLM/MCP assistant layer. Inventory CRUD, sellables/packages, purchase orders, vendor logic, dashboards, CSV import/export, and an assistant that calls the same APIs the UI does."
+ogTitle: "Stockman — Full-stack SaaS · Darian Lagman"
+ogDescription: "Inventory CRUD, dashboards, MCP-based LLM assistant, forecasting, role-based auth."
+publishedAt: "2026-04-30"
+updatedAt: "2026-05-01"
+outcomes:
+  - { label: "SKUs handled", value: "~3,000", sub: "across design partners" }
+  - { label: "p50 list latency", value: "<120ms", sub: "Spring Boot + MySQL" }
+  - { label: "Deployed envs", value: "8", sub: "dev · staging · per-tenant" }
+  - { label: "Design partners", value: "2", sub: "pre-launch" }
+---
+
+## Problem
+
+A small distributor I knew was running a real business out of a stack of CSV files: a spreadsheet for inventory, another for purchase orders, exports from Shopify for sales, and a kit-of-parts breakdown that lived in someone's head. It worked at a few hundred SKUs. It stopped working at a few thousand.
+
+Stockman replaces the spreadsheet stack with a single workspace: inventory CRUD, sellables and kit/package modeling, purchase orders, vendor logic, dashboards, CSV import/export with diff preview, and an LLM assistant that can answer *"what should I reorder before Tuesday?"* through an MCP layer over the same APIs the UI uses.
+
+## Architecture
+
+<CaseDiagram kind="stockman" />
+
+```
+[ React SPA ] ──HTTPS──▶ [ Spring Boot API ]
+                              │  ├──▶ [ MySQL ]
+                              │  ├──▶ [ Redis (sessions) ]
+                              │  └──▶ [ MCP Server ] ──▶ [ Claude / OpenAI ]
+                              ▲
+                              └─ session-based auth · RBAC
+```
+
+A few decisions worth defending:
+
+- **Sessions over JWT.** Back-office app, no mobile clients, server-side revocation matters more than statelessness.
+- **Spring Boot over Node.** Strong typing, mature data-access, and team familiarity outweigh "JS everywhere."
+- **MCP over a custom function-calling shim.** Separates assistant capability from API authn/authz; same backend, two interfaces.
+- **Docker Compose for dev parity.** One `docker compose up` boots MySQL, Redis, the API, and the MCP server.
+
+## Features
+
+<Steps>
+  <Step title="Inventory CRUD with sellables/packages">
+    Kits, bundles, and parent-child relationships modeled as a graph, not a flat list. The UI shows the graph; the API enforces invariants.
+  </Step>
+  <Step title="CSV import/export with diff preview">
+    Never blindly upsert; show the user the changeset before commit. A single bad column shouldn't quietly rewrite live data.
+  </Step>
+  <Step title="Purchase orders + vendor logic">
+    Vendors-per-product, lead-time-aware suggested orders, multi-vendor SKUs without duplication.
+  </Step>
+  <Step title="Dashboards & analytics">
+    Turnover, dead stock, margin by SKU. The numbers come from the same store the assistant queries.
+  </Step>
+  <Step title="LLM/MCP assistant layer">
+    The assistant calls the same `/api/v1/inventory/*` endpoints with role-scoped permissions. It can never do something the user can't.
+  </Step>
+  <Step title="Forecasting integration">
+    Pulls demand forecasts from the engine in the next case study to power reorder suggestions.
+  </Step>
+</Steps>
+
+## Deep dive — the MCP layer
+
+The assistant doesn't get its own database connection. It gets tools that proxy to the same Spring Boot endpoints, with the user's session attached. A representative tool:
+
+```typescript
+// tools/stockman.ts
+export const reorder_recommendations = tool({
+  name: "reorder_recommendations",
+  description:
+    "Returns SKUs that should be reordered based on stock, lead time, " +
+    "and demand forecast. Permission-scoped to the caller's role.",
+  inputSchema: z.object({
+    horizon_days: z.number().int().min(1).max(180).default(30),
+    vendor_id: z.string().uuid().optional(),
+  }),
+  handler: async (input, ctx) => {
+    const session = ctx.session; // forwarded from the MCP client
+    return api.fetch("/api/v1/recommendations/reorder", {
+      session,
+      query: input,
+    });
+  },
+});
+```
+
+<Callout tone="info" title="Why proxy through the API instead of the DB">
+  If the MCP server talked to MySQL directly, the agent's permission model would have to be reimplemented at a second boundary. Routing through the API means there is exactly one authorization model, and the assistant is forced to live inside it.
+</Callout>
+
+## What I'd do differently
+
+- I'd start with Postgres. MySQL was fine; nothing about Stockman needs it specifically.
+- I'd commit to MCP from day one rather than retrofitting it; the early "send the whole DB schema in a system prompt" experiments were a dead end.
+- The forecasting engine should have been a separate service from week one, not week ten.

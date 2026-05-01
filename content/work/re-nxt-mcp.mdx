@@ -1,0 +1,58 @@
+---
+title: "Raiser's Edge NXT MCP"
+order: 4
+role: "Architecture & prototype"
+timeline: "2026"
+status: "Research"
+category: "Agents / MCP"
+stack: ["MCP", "TypeScript", "Raiser's Edge NXT", "OAuth"]
+hero:
+  type: "image"
+  src: "/media/re-mcp/hero.svg"
+  poster: "/media/re-mcp/hero.svg"
+summary: "Architectural design study comparing three MCP server topologies for connecting LLM agents to Raiser's Edge NXT — a nonprofit CRM with constituents, gifts, fundraising, events, and analytics domains."
+publishedAt: "2026-04-30"
+---
+
+## Problem
+
+Raiser's Edge NXT (RE NXT) is a nonprofit CRM with five organizationally distinct domains: constituents, gifts, fundraising, events, and analytics. Different staff touch different domains, the data has different sensitivity profiles (gifts are PII-heavy, events less so), and the API surface is large.
+
+Connecting an LLM agent to "all of RE NXT" via a single tool list does not survive contact with reality. The list balloons, routing accuracy collapses, and the permission model becomes an afterthought. This study compares three MCP topologies for this kind of multi-domain CRM.
+
+## Three architectures
+
+<CaseDiagram kind="mcp" />
+
+<Compare>
+  <CompareItem title="1. Monolithic MCP">
+    One server, every tool registered. Simple to operate. Routing accuracy degrades past roughly 40 tools, and permission scoping becomes a per-tool problem instead of a per-server boundary.
+  </CompareItem>
+  <CompareItem title="2. Semantic tool filtering">
+    One server, but tools are dynamically scoped by the user's intent (embedding-similarity over the latest user turn). Cheaper than a full split. Fragile when intent shifts mid-conversation.
+  </CompareItem>
+</Compare>
+
+<Compare>
+  <CompareItem title="3. Multi-server domain split">
+    One MCP server per domain (constituents, gifts, events, analytics). Highest isolation, cleanest permission model, requires a meta-router that picks the right server per turn.
+  </CompareItem>
+  <CompareItem title="Meta-router">
+    The meta-router is a small classifier — embedding similarity plus a short rules layer — that decides which domain server gets the turn. It is a 200-line problem.
+  </CompareItem>
+</Compare>
+
+## Permission-aware actions
+
+Constituents and gifts are PII-heavy; the spec includes role-scoped *tool exposure*, not just role-scoped data. A program-staff session shouldn't even see the gifts-mutation tools in its tool list — much less be denied at execution time. This is easier to enforce when tools live on a server you can swap, which is the quiet third reason to split.
+
+## Verdict
+
+<Callout tone="info" title="For RE NXT specifically, the multi-server split wins">
+  The domains are organizationally separate (program staff vs. development staff), the auth boundaries already exist in the source CRM, and a meta-router is a tractable 200-line problem. The monolithic and semantic-filter approaches are cheaper to build but pay back the savings in routing failures and permission complexity.
+</Callout>
+
+## What I'd do differently
+
+- Spend less time on the semantic-filter prototype. I knew it wouldn't survive multi-turn conversations after a week; I gave it three.
+- Treat the meta-router as a logging surface from day one. Routing decisions are the most interesting thing to read three weeks later.

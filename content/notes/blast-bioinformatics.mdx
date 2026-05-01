@@ -1,0 +1,33 @@
+---
+title: "BLAST Bioinformatics"
+summary: "A short note on implementing BLAST's seed-and-extend heuristic from scratch and where the speed actually comes from."
+tags: ["bioinformatics", "algorithms", "strings"]
+publishedAt: "2026-04-30"
+---
+
+## Why BLAST is interesting
+
+BLAST is a practical lesson in algorithm design: exact global alignment is expensive, but biological sequences often contain short high-signal matches. The system is fast because it searches for promising seeds first, then spends alignment work only where the seed suggests a useful hit.
+
+## Implementation notes
+
+<Steps>
+  <Step title="Index fixed-width words">
+    Split the query into k-mers, score neighboring words, and keep only candidates above a threshold.
+  </Step>
+  <Step title="Scan the database">
+    Look up exact word hits quickly rather than trying to align every sequence pair.
+  </Step>
+  <Step title="Extend both directions">
+    Grow each seed while the running score improves; stop when the score drops below a cutoff.
+  </Step>
+  <Step title="Rank local alignments">
+    Emit high-scoring segment pairs, then merge or filter overlaps before reporting.
+  </Step>
+</Steps>
+
+The useful engineering habit here is separating the cheap candidate stage from the expensive verification stage. That pattern shows up everywhere: search systems, compiler passes, agent tool routing, and inventory alerts.
+
+<Callout tone="info" title="What I would animate">
+  A DNA string sliding under a query window, with matching seeds lighting up and only those regions extending into alignments.
+</Callout>

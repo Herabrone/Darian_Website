@@ -1,0 +1,33 @@
+---
+title: "Database Project"
+summary: "A compact database-systems project covering query planning, B-tree indexing, and a transactional buffer-pool mental model."
+tags: ["databases", "systems", "storage"]
+publishedAt: "2026-04-30"
+---
+
+## What the project covered
+
+The database project was a useful way to connect data structures to latency. A query plan is not an abstract tree once it is touching disk pages, cache policy, indexes, and transaction boundaries.
+
+## Components
+
+<Steps>
+  <Step title="Query planning">
+    Convert relational operations into a plan that can estimate cost before touching the full dataset.
+  </Step>
+  <Step title="B-tree index">
+    Keep ordered keys searchable while preserving locality for range scans.
+  </Step>
+  <Step title="Buffer pool">
+    Treat memory as a managed cache over pages, not a bag of objects.
+  </Step>
+  <Step title="Transaction model">
+    Track when reads and writes are visible, and where rollback needs enough history to be safe.
+  </Step>
+</Steps>
+
+It made the tradeoffs in production databases feel less magical. When Stockman has a slow inventory query, I know to look at cardinality, indexes, page locality, and access patterns before touching the UI.
+
+<Callout tone="info" title="Connection to Stockman">
+  The lesson carried directly into schema design: model the domain clearly, then index the paths users and dashboards actually traverse.
+</Callout>

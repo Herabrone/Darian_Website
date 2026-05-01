@@ -1,0 +1,33 @@
+---
+title: "Cryptology Project"
+summary: "Notes from implementing classical and modern cryptographic primitives with attention to timing, randomness, and API shape."
+tags: ["cryptology", "security", "systems"]
+publishedAt: "2026-04-30"
+---
+
+## The part that stuck
+
+The math matters, but the implementation boundaries matter just as much. A correct primitive can still become a bad system if it exposes sharp edges: reused nonces, weak randomness, variable-time comparisons, or APIs that make insecure defaults easy.
+
+## Project shape
+
+<Steps>
+  <Step title="Classical ciphers">
+    Implement substitution and transposition systems to make frequency analysis concrete.
+  </Step>
+  <Step title="Modern primitives">
+    Build small, testable implementations around block modes, hashing, and message authentication.
+  </Step>
+  <Step title="Attack harnesses">
+    Write scripts that break deliberately weak configurations instead of only testing happy paths.
+  </Step>
+  <Step title="API review">
+    Check whether the interface nudges a caller toward correct nonce handling and constant-time checks.
+  </Step>
+</Steps>
+
+The main takeaway is that cryptographic code has to be boring at the boundary. The system should make the safe operation obvious and the unsafe operation hard to reach.
+
+<Callout tone="warn" title="Launch note">
+  This page should stay as a project note, not a library recommendation. Real production crypto belongs to audited libraries.
+</Callout>

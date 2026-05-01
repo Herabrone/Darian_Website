@@ -1,0 +1,59 @@
+import { ImageResponse } from "next/og";
+
+export const runtime = "edge";
+export const alt = "Darian Lagman — Full-stack engineer";
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+
+export default function OG() {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          background: "#0a0a0b",
+          color: "#f4f4f5",
+          padding: "72px",
+          fontFamily: "ui-sans-serif, system-ui, sans-serif",
+          backgroundImage:
+            "radial-gradient(at 25% 0%, rgba(124,140,255,0.20), transparent 55%)",
+        }}
+      >
+        <div style={{ fontFamily: "ui-monospace, monospace", color: "#7c8cff", fontSize: 22 }}>
+          darianlagman.ca
+        </div>
+        <div style={{ flex: 1 }} />
+        <div style={{ fontSize: 80, fontWeight: 600, lineHeight: 1.05, letterSpacing: -2 }}>
+          Darian Lagman
+        </div>
+        <div
+          style={{
+            marginTop: 16,
+            fontSize: 30,
+            color: "#a1a1aa",
+            maxWidth: 900,
+            lineHeight: 1.3,
+          }}
+        >
+          Full-stack engineer — AI-assisted products, forecasting systems, applied infrastructure.
+        </div>
+        <div
+          style={{
+            marginTop: 40,
+            fontFamily: "ui-monospace, monospace",
+            fontSize: 18,
+            color: "#71717a",
+            textTransform: "uppercase",
+            letterSpacing: 2,
+          }}
+        >
+          PORTFOLIO · 2026
+        </div>
+      </div>
+    ),
+    size,
+  );
+}

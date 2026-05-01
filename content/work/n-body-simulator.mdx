@@ -1,0 +1,56 @@
+---
+title: "N-Body Simulator"
+order: 3
+role: "Sole engineer"
+timeline: "2024 – 2025"
+status: "Shipped"
+category: "Systems"
+stack: ["C", "Python", "NumPy", "Physics"]
+hero:
+  type: "image"
+  src: "/media/nbody/hero.svg"
+  poster: "/media/nbody/hero.svg"
+summary: "A gravitational N-body simulator built to compare numerical integrators by energy conservation, performance, and visual stability — written for my Physics & Astronomy minor coursework, then extended."
+publishedAt: "2026-04-30"
+outcomes:
+  - { label: "Bodies", value: "64+", sub: "real-time" }
+  - { label: "Best integrator", value: "Verlet", sub: "energy drift" }
+  - { label: "Worst", value: "Euler", sub: "as expected" }
+  - { label: "FPS @ 64 bodies", value: "60", sub: "single thread" }
+---
+
+## Problem
+
+Numerical integration is one of those topics that's easy to use and hard to use correctly. I wanted a simulator I could *trust* — meaning I could read off energy and momentum at every step and watch what the integrator was actually doing to the system.
+
+## Integrators compared
+
+<CaseDiagram kind="nbody" />
+
+<Compare>
+  <CompareItem title="Forward Euler">
+    Simplest, fastest, wrong. Energy grows without bound on a stable orbit. Useful only as a baseline.
+  </CompareItem>
+  <CompareItem title="RK4">
+    Classical fourth-order Runge–Kutta. Accurate over short windows but not symplectic — energy drifts slowly.
+  </CompareItem>
+  <CompareItem title="Velocity Verlet">
+    Symplectic, second-order. Energy oscillates around a fixed value rather than drifting; the right default for gravitational systems.
+  </CompareItem>
+  <CompareItem title="Leapfrog">
+    Same family as Verlet, slightly different staggering. Equivalent for most purposes here.
+  </CompareItem>
+</Compare>
+
+## Conservation laws as ground truth
+
+The benchmark isn't visual stability; it's energy and angular momentum drift over a long run. Symplectic integrators (Verlet, leapfrog) keep both bounded. RK4 doesn't, despite a higher local accuracy order — that's the symplectic-vs-non-symplectic story in one chart.
+
+## Visualization
+
+The recordings on the home page are this simulator running with a few dozen bodies, with a HUD overlay showing instantaneous total energy and angular momentum. I left the HUD on intentionally; without it you can't see the integrator misbehaving until orbits visibly fly apart.
+
+## What I'd do differently
+
+- Pick velocity Verlet earlier. The "let's compare four integrators" framing was a coursework artifact; in practice I always use Verlet.
+- Move the visualization to the GPU. The CPU loop caps the simulation at the framerate it can render.
