@@ -1,0 +1,46 @@
+---
+title: "Hockey Goal Detector"
+order: 5
+role: "Builder"
+timeline: "2026 – present"
+status: "In progress"
+category: "Computer Vision"
+stack: ["YOLO", "Python", "OpenCV", "Docker", "GPIO"]
+hero:
+  type: "image"
+  src: "/media/hockey/hero.svg"
+  poster: "/media/hockey/hero.svg"
+summary: "A rink-side computer vision project that uses a YOLO model to detect goals and trigger an old Bud Light goal light through a small hardware bridge."
+ogTitle: "Hockey Goal Detector · Darian Lagman"
+ogDescription: "YOLO-based goal detection wired to a retro Bud Light goal light."
+publishedAt: "2026-05-03"
+updatedAt: "2026-05-03"
+outcomes:
+  - { label: "Detector", value: "YOLO", sub: "goal-line events" }
+  - { label: "Output", value: "Goal light", sub: "retro Bud Light hardware" }
+  - { label: "Status", value: "Building", sub: "model + trigger loop" }
+---
+
+## Goal
+
+The project is simple in the best way: point a camera at a hockey net, detect when the puck crosses the line, and fire an old Bud Light goal light like it belongs in a basement rink broadcast booth.
+
+The interesting part is making the loop dependable. A YOLO model can find candidate puck and goal events, but the system still needs confidence thresholds, frame-to-frame smoothing, false-positive handling, and a hardware trigger that fails calmly instead of strobing every time someone skates through the crease.
+
+## Architecture
+
+```
+[ Camera ] -> [ YOLO detector ] -> [ event filter ] -> [ relay / controller ] -> [ Bud Light goal light ]
+```
+
+The detector watches for goal-line events, the filter turns noisy frame predictions into a single clean event, and the hardware bridge handles the old goal light without coupling the model loop directly to the relay.
+
+## Current Focus
+
+- Collecting representative clips from different angles and lighting conditions.
+- Tuning the YOLO confidence threshold so it catches real goals without firing on near-misses.
+- Building a small trigger service that can run locally and keep the hardware side isolated.
+
+## What Comes Next
+
+The next milestone is a repeatable test set: clips with real goals, saves, traffic in front of the net, and no-puck motion. Once that is stable, the goal light becomes the fun part instead of the debugging surface.

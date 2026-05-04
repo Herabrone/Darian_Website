@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0B111A"/>
+    </linearGradient>
+    <radialGradient id="ice" cx="48%" cy="58%" r="72%">
+      <stop offset="0%" stop-color="#5EE3FF" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#5EE3FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="light" cx="78%" cy="24%" r="32%">
+      <stop offset="0%" stop-color="#F2B84B" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#F2B84B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="800" fill="url(#bg)"/>
+  <rect width="1280" height="800" fill="url(#ice)"/>
+  <rect width="1280" height="800" fill="url(#light)"/>
+  <g fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2">
+    <path d="M120 230 H1160"/>
+    <path d="M120 400 H1160"/>
+    <path d="M120 570 H1160"/>
+    <path d="M320 120 V680"/>
+    <path d="M640 120 V680"/>
+    <path d="M960 120 V680"/>
+  </g>
+  <g transform="translate(210 170)">
+    <rect x="0" y="0" width="560" height="360" rx="32" fill="#1E2430" stroke="#4A5266" stroke-width="3"/>
+    <rect x="70" y="72" width="360" height="216" fill="none" stroke="#5EE3FF" stroke-width="7" stroke-dasharray="28 20"/>
+    <path d="M118 282 C216 224 268 178 390 88" stroke="#AEB6C4" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <circle cx="390" cy="88" r="22" fill="#F4F1EA"/>
+    <rect x="296" y="44" width="134" height="64" rx="18" fill="rgba(98,232,154,0.10)" stroke="rgba(98,232,154,0.48)" stroke-width="3"/>
+    <text x="363" y="84" text-anchor="middle" fill="#62E89A" font-family="ui-monospace, monospace" font-size="28" font-weight="700">GOAL</text>
+  </g>
+  <g transform="translate(850 206)">
+    <rect x="0" y="0" width="220" height="280" rx="34" fill="#252C3A" stroke="#343B4A" stroke-width="3"/>
+    <circle cx="110" cy="104" r="64" fill="rgba(242,184,75,0.12)" stroke="#F2B84B" stroke-width="8"/>
+    <circle cx="110" cy="104" r="34" fill="rgba(242,184,75,0.28)"/>
+    <path d="M72 218 H148" stroke="#4A5266" stroke-width="12" stroke-linecap="round"/>
+    <text x="110" y="252" text-anchor="middle" fill="#737B8C" font-family="ui-monospace, monospace" font-size="18">relay armed</text>
+  </g>
+  <text x="76" y="706" fill="#AEB6C4" font-family="ui-monospace, monospace" font-size="24" letter-spacing="0.08em">YOLO GOAL DETECTOR</text>
+  <text x="76" y="744" fill="#737B8C" font-family="ui-monospace, monospace" font-size="18">computer vision · event filter · Bud Light goal light</text>
+</svg>
