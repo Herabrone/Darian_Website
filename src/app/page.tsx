@@ -9,7 +9,7 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <Section eyebrow="WORK" count="04" title="What I'm building.">
+      <Section eyebrow="WORK" count="05" title="What I'm building.">
         <WorkStrip />
       </Section>
 
