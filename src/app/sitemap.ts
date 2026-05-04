@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { work, notes } from "#site/content";
 
 const SITE = "https://darianlagman.ca";
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/work", "/about", "/lab", "/life", "/now", "/resume", "/notes"].map(

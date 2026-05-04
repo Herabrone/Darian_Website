@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Darian Lagman", url: "https://darianlagman.ca" }],
   creator: "Darian Lagman",
   robots: { index: true, follow: true },
-  icons: { icon: "/favicon.svg", apple: "/apple-touch-icon.png" },
+  icons: { icon: "/favicon.svg" },
   ...buildMetadata({
     title: "Darian Lagman — Full-stack engineer",
     description:
