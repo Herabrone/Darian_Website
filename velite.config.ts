@@ -22,7 +22,7 @@ const work = defineCollection({
       role: s.string(),
       timeline: s.string(),
       status: s.enum(["Shipped", "In progress", "Research"]),
-      category: s.enum(["Full-stack", "ML / Forecasting", "Agents / MCP", "Systems"]),
+      category: s.enum(["Full-stack", "ML / Forecasting", "Computer Vision", "Agents / MCP", "Systems"]),
       stack: s.array(s.string()),
       links: s
         .object({

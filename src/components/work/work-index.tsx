@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { ProjectCard } from "@/components/work/project-card";
 import { PROJECTS } from "@/data/projects";
 
-const FILTERS = ["All", "Full-stack", "ML / Forecasting", "Agents / MCP", "Systems", "Infra"] as const;
+const FILTERS = ["All", "Full-stack", "ML / Forecasting", "Computer Vision", "Agents / MCP", "Systems", "Infra"] as const;
 type Filter = (typeof FILTERS)[number];
 
 export function WorkIndex() {

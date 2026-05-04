@@ -11,6 +11,8 @@ export function ProjectVisual({ project }: { project: Project }) {
       return <NBodyVisual />;
     case "re-nxt-mcp":
       return <McpVisual />;
+    case "hockey-goal-detector":
+      return <HockeyGoalVisual />;
     case "homelab":
       return <HomelabVisual />;
     case "blast":
@@ -18,6 +20,34 @@ export function ProjectVisual({ project }: { project: Project }) {
     default:
       return null;
   }
+}
+
+function HockeyGoalVisual() {
+  return (
+    <svg viewBox="0 0 320 200" className="h-full w-full" role="img" aria-label="Hockey goal detector preview">
+      <rect width="320" height="200" rx="14" fill="var(--color-bg-elevated)" />
+      <g opacity="0.5" stroke="var(--color-border)" strokeWidth="1">
+        <path d="M28 44 H292" />
+        <path d="M28 84 H292" />
+        <path d="M28 124 H292" />
+        <path d="M28 164 H292" />
+      </g>
+      <rect x="36" y="52" width="160" height="96" rx="10" fill="var(--color-surface-hi)" stroke="var(--color-border-strong)" />
+      <path d="M58 74 H174 V134 H58 Z" fill="none" stroke="var(--color-cyan)" strokeWidth="2" strokeDasharray="6 5" />
+      <path d="M80 132 C112 112 126 98 156 78" fill="none" stroke="var(--color-fg-subtle)" strokeWidth="2" strokeLinecap="round" />
+      <circle className="visual-pulse" cx="156" cy="78" r="7" fill="var(--color-fg)" />
+      <rect className="visual-fade" x="122" y="58" width="52" height="26" rx="6" fill="var(--color-green-bg)" stroke="var(--color-green-ring)" />
+      <text x="148" y="75" textAnchor="middle" fill="var(--color-green)" fontSize="10" fontFamily="var(--font-mono)">
+        GOAL
+      </text>
+      <rect x="214" y="58" width="70" height="82" rx="10" fill="var(--color-surface-hi)" stroke="var(--color-border)" />
+      <circle className="visual-pulse" cx="249" cy="86" r="20" fill="var(--color-amber-bg)" stroke="var(--color-amber)" strokeWidth="2" />
+      <path d="M238 120 H260" stroke="var(--color-border-strong)" strokeWidth="3" strokeLinecap="round" />
+      <text x="160" y="176" textAnchor="middle" fill="var(--color-fg-subtle)" fontSize="10" fontFamily="var(--font-mono)">
+        YOLO detector · relay trigger
+      </text>
+    </svg>
+  );
 }
 
 function StockmanVisual() {
@@ -247,10 +277,10 @@ function HomelabVisual() {
         <rect x="34" y="138" width="252" height="34" rx="10" fill="var(--color-surface-hi)" stroke="var(--color-border)" />
         <circle className="visual-pulse" cx="50" cy="155" r="4" fill="var(--color-green)" />
         <text x="64" y="159" fill="var(--color-fg)" fontSize="10" fontFamily="var(--font-mono)">
-          ollama: llama-3.1-70b · idle
+          ollama: Gemma4:26b
         </text>
-        <text x="276" y="159" textAnchor="end" fill="var(--color-fg-subtle)" fontSize="10" fontFamily="var(--font-mono)">
-          rtx 3090
+        <text x="64" y="168" fill="var(--color-fg-subtle)" fontSize="9" fontFamily="var(--font-mono)">
+          idle · RTX 3090
         </text>
       </g>
     </svg>

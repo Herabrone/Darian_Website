@@ -1,5 +1,5 @@
 export type ProjectStatus = "Shipped" | "In progress" | "Research" | "Ongoing";
-export type ProjectCategory = "Full-stack" | "ML / Forecasting" | "Agents / MCP" | "Systems" | "Infra";
+export type ProjectCategory = "Full-stack" | "ML / Forecasting" | "Computer Vision" | "Agents / MCP" | "Systems" | "Infra";
 
 export type Project = {
   slug: string;
@@ -67,17 +67,30 @@ export const PROJECTS: Project[] = [
     order: 4,
   },
   {
+    slug: "hockey-goal-detector",
+    title: "Hockey Goal Detector",
+    subtitle: "YOLO-based goal detection that triggers a retro Bud Light goal light when a shot crosses the line.",
+    category: "Computer Vision",
+    status: "In progress",
+    stack: ["YOLO", "Python", "OpenCV"],
+    poster: "/media/hockey/hero.svg",
+    video: undefined,
+    kind: "hockey-goal-detector",
+    span: { col: 4 },
+    order: 5,
+  },
+  {
     slug: "homelab",
-    title: "Homelab · LLM Infra",
-    subtitle: "RTX 3090 box running Ollama and local models for agentic coding, with a working notebook of GPU + inference experiments.",
+    title: "Homelab · LLM + Self-hosted Infra",
+    subtitle: "RTX 3090 box running Gemma4:26b, plus Docker-hosted Immich, Jellyfin, Nextcloud, and supporting services.",
     category: "Infra",
     status: "Ongoing",
-    stack: ["Ollama", "RTX 3090", "Linux"],
+    stack: ["Ollama", "Docker", "RTX 3090"],
     poster: "/media/about/darian.jpg",
     href: "/lab",
     kind: "homelab",
     span: { col: 4 },
-    order: 5,
+    order: 6,
   },
 ];
 
