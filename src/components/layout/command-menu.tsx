@@ -19,8 +19,13 @@ export function CommandMenu() {
         setOpen((o) => !o);
       }
     };
+    const onOpen = () => setOpen(true);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("command-menu:open", onOpen);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("command-menu:open", onOpen);
+    };
   }, []);
 
   const go = (href: string) => {
@@ -92,7 +97,7 @@ export function CommandMenu() {
             <PaletteItem onSelect={copyEmail}>Copy email — {SITE.email}</PaletteItem>
             <PaletteItem
               onSelect={() => {
-                window.open("/resume/darian-lagman-resume.pdf", "_blank");
+                window.open("/resume/Darian-Lagman-Resume.pdf", "_blank");
                 setOpen(false);
               }}
             >
