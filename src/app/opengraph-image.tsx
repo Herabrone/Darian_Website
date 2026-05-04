@@ -14,26 +14,26 @@ export default function OG() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background: "#0a0a0b",
-          color: "#f4f4f5",
+          background: "#0d1b36",
+          color: "#ffffff",
           padding: "72px",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
           backgroundImage:
-            "radial-gradient(at 25% 0%, rgba(124,140,255,0.20), transparent 55%)",
+            "radial-gradient(at 25% 0%, rgba(59,130,246,0.25), transparent 55%)",
         }}
       >
-        <div style={{ fontFamily: "ui-monospace, monospace", color: "#7c8cff", fontSize: 22 }}>
+        <div style={{ fontFamily: "ui-monospace, monospace", color: "#60a5fa", fontSize: 22 }}>
           darianlagman.ca
         </div>
         <div style={{ flex: 1 }} />
-        <div style={{ fontSize: 80, fontWeight: 600, lineHeight: 1.05, letterSpacing: -2 }}>
+        <div style={{ fontSize: 80, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>
           Darian Lagman
         </div>
         <div
           style={{
             marginTop: 16,
             fontSize: 30,
-            color: "#a1a1aa",
+            color: "#e2e8f0",
             maxWidth: 900,
             lineHeight: 1.3,
           }}
@@ -45,7 +45,7 @@ export default function OG() {
             marginTop: 40,
             fontFamily: "ui-monospace, monospace",
             fontSize: 18,
-            color: "#71717a",
+            color: "#94a3b8",
             textTransform: "uppercase",
             letterSpacing: 2,
           }}

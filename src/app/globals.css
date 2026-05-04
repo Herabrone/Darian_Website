@@ -2,57 +2,62 @@
 
 @theme {
   /* ----- Surfaces ----- */
-  --color-bg: #12151b;
-  --color-bg-soft: #171b23;
-  --color-bg-elevated: #1e2430;
-  --color-surface: #1e2430;
-  --color-surface-hi: #252c3a;
-  --color-border: #343b4a;
-  --color-border-strong: #4a5266;
-  --color-nav-bg: rgba(18, 21, 27, 0.78);
+  --color-bg: #0d1b36;
+  --color-bg-soft: #112347;
+  --color-bg-elevated: #0a1628;
+  --color-surface: #112347;
+  --color-surface-hi: #16305f;
+  --color-border: #1f3565;
+  --color-border-strong: #2c4a86;
+  --color-nav-bg: rgba(9, 18, 40, 0.78);
 
   /* ----- Text ----- */
-  --color-fg: #f4f1ea;
-  --color-fg-muted: #aeb6c4;
-  --color-fg-subtle: #737b8c;
-  --color-fg-faint: #5a6373;
+  --color-fg: #ffffff;
+  --color-fg-muted: #e2e8f0;
+  --color-fg-subtle: #94a3b8;
+  --color-fg-faint: #64748b;
 
   /* ----- Accent ----- */
-  --color-accent: #7c8cff;
-  --color-accent-hi: #b8c0ff;
-  --color-accent-contrast: #12151b;
-  --color-accent-bg: rgba(124, 140, 255, 0.12);
-  --color-accent-ring: rgba(124, 140, 255, 0.42);
-  --color-cyan: #5ee3ff;
-  --color-cyan-bg: rgba(94, 227, 255, 0.1);
-  --color-cyan-ring: rgba(94, 227, 255, 0.36);
-  --color-green: #62e89a;
-  --color-green-bg: rgba(98, 232, 154, 0.1);
-  --color-green-ring: rgba(98, 232, 154, 0.34);
-  --color-amber: #f2b84b;
-  --color-amber-bg: rgba(242, 184, 75, 0.1);
-  --color-amber-ring: rgba(242, 184, 75, 0.36);
-  --color-rose: #ff6b8a;
-  --color-rose-bg: rgba(255, 107, 138, 0.1);
-  --color-rose-ring: rgba(255, 107, 138, 0.36);
+  --color-accent: #3b82f6;
+  --color-accent-hi: #60a5fa;
+  --color-accent-contrast: #0a1628;
+  --color-accent-bg: rgba(59, 130, 246, 0.14);
+  --color-accent-ring: rgba(96, 165, 250, 0.45);
+  --color-cyan: #38bdf8;
+  --color-cyan-bg: rgba(56, 189, 248, 0.12);
+  --color-cyan-ring: rgba(56, 189, 248, 0.4);
+  --color-green: #22c55e;
+  --color-green-bg: rgba(34, 197, 94, 0.12);
+  --color-green-ring: rgba(34, 197, 94, 0.4);
+  --color-amber: #f59e0b;
+  --color-amber-bg: rgba(245, 158, 11, 0.12);
+  --color-amber-ring: rgba(245, 158, 11, 0.4);
+  --color-rose: #fb7185;
+  --color-rose-bg: rgba(251, 113, 133, 0.12);
+  --color-rose-ring: rgba(251, 113, 133, 0.4);
 
   /* ----- Semantic ----- */
-  --color-success: #62e89a;
-  --color-success-bg: rgba(98, 232, 154, 0.08);
-  --color-success-ring: rgba(98, 232, 154, 0.35);
-  --color-warn: #f2b84b;
-  --color-warn-bg: rgba(242, 184, 75, 0.08);
-  --color-warn-ring: rgba(242, 184, 75, 0.35);
+  --color-success: #22c55e;
+  --color-success-bg: rgba(34, 197, 94, 0.1);
+  --color-success-ring: rgba(34, 197, 94, 0.4);
+  --color-warn: #f59e0b;
+  --color-warn-bg: rgba(245, 158, 11, 0.1);
+  --color-warn-ring: rgba(245, 158, 11, 0.4);
   --color-danger: #f87171;
 
+  /* ----- Decorative ----- */
+  --color-pattern: rgba(56, 189, 248, 0.05);
+  --color-slash: #22c55e;
+
   /* ----- Code ----- */
-  --color-code-bg: #0e1117;
-  --color-code-border: #27303d;
+  --color-code-bg: #050d1d;
+  --color-code-border: #1f3565;
 
   /* ----- Typography ----- */
   --font-sans:
     var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "JetBrains Mono", monospace;
+  --font-script: var(--font-caveat), "Caveat", "Segoe Script", cursive;
 
   /* ----- Radii ----- */
   --radius-sm: 6px;
@@ -85,10 +90,67 @@ body {
   font-feature-settings: "ss01", "cv11";
   min-height: 100dvh;
   background:
-    radial-gradient(at 18% -12%, rgba(124, 140, 255, 0.14), transparent 48%),
-    radial-gradient(at 86% 8%, rgba(94, 227, 255, 0.07), transparent 44%),
+    radial-gradient(at 12% -10%, rgba(59, 130, 246, 0.12), transparent 50%),
     var(--color-bg);
+  position: relative;
 }
+
+/* Faint circuit-board pattern overlay across the whole page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%2338bdf8' stroke-opacity='0.6' stroke-width='0.6'><path d='M0 30 H40 V0'/><path d='M60 0 V20 H120'/><path d='M0 90 H80 V60 H120'/><path d='M30 120 V100 H70 V60'/><path d='M100 120 V80'/></g><g fill='%2338bdf8' fill-opacity='0.7'><circle cx='40' cy='30' r='1.6'/><circle cx='60' cy='20' r='1.6'/><circle cx='80' cy='90' r='1.6'/><circle cx='80' cy='60' r='1.6'/><circle cx='30' cy='100' r='1.6'/><circle cx='70' cy='60' r='1.6'/><circle cx='100' cy='80' r='1.6'/></g></svg>");
+  background-size: 120px 120px;
+  opacity: 0.45;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 50%, transparent 100%);
+}
+
+/* Hero right-edge diagonal slashes */
+.hero-slashes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-slashes::before,
+.hero-slashes::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  width: 220px;
+  height: 4px;
+  background: var(--color-slash);
+  opacity: 0.7;
+  transform: rotate(-45deg);
+  border-radius: 2px;
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.45);
+}
+.hero-slashes::before {
+  top: 14%;
+  width: 260px;
+  opacity: 0.55;
+}
+.hero-slashes::after {
+  top: 38%;
+  width: 160px;
+  opacity: 0.85;
+}
+.hero-slashes > span {
+  position: absolute;
+  right: -20px;
+  height: 4px;
+  background: var(--color-slash);
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.35);
+}
+.hero-slashes > span:nth-child(1) { top: 58%; width: 200px; opacity: 0.6; }
+.hero-slashes > span:nth-child(2) { top: 76%; width: 120px; opacity: 0.8; }
+.hero-slashes > span:nth-child(3) { top: 90%; width: 240px; opacity: 0.45; }
 
 ::selection {
   background: var(--color-accent-bg);
@@ -99,6 +161,13 @@ body {
   outline: 2px solid var(--color-accent-ring);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 0.25s;
+  animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 a {
