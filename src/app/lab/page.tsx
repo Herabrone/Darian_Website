@@ -13,7 +13,7 @@ export const metadata: Metadata = buildMetadata({
 const RACK = [
   { label: "Workstation", value: "Ryzen + RTX 3090", sub: "64GB · NVMe RAID" },
   { label: "Containers", value: "~22 active", sub: "Docker Compose" },
-  { label: "Models", value: "Llama 3.1, Qwen, Phi", sub: "Quantized 4-bit" },
+  { label: "Models", value: "Gemma4:26b", sub: "Ollama on RTX 3090" },
   { label: "Network", value: "Tailscale mesh", sub: "Per-device addrs" },
   { label: "Tunnel", value: "Cloudflare", sub: "Zero open ports" },
   { label: "Ingress", value: "Caddy", sub: "Auto-TLS" },
@@ -68,17 +68,18 @@ export default function LabPage() {
           <p>
             <strong>Docker is the operating system of my workflow.</strong> Every service I run —
             Stockman&apos;s full dev stack, local LLMs through Ollama, OpenWebUI behind Tailscale,
-            Langfuse for trace logging, a personal RAG corpus, Caddy as the ingress, Grafana for the
-            things I want to actually see — runs as a Compose-defined container, declared in code,
-            reproducible from a fresh disk in fifteen minutes. Secrets in a vault. Observability
-            before features. One command to rebuild.
+            Immich for photos, Jellyfin for media, Nextcloud for files, Langfuse for trace logging,
+            a personal RAG corpus, Caddy as the ingress, Grafana for the things I want to actually
+            see — runs as a Compose-defined container, declared in code, reproducible from a fresh
+            disk in fifteen minutes. Secrets in a vault. Observability before features. One command
+            to rebuild.
           </p>
           <p>
-            <strong>Local models are a daily driver, not a demo.</strong> A quantized Llama 3.1 8B
-            answers terminal questions faster than any vendor API can; Qwen 2.5 32B handles the
-            longer reasoning tasks I don&apos;t want round-tripping. Frontier models still win on hard
-            problems — and I use them — but for the loop of &quot;summarize this log, draft this commit
-            message, sketch this API surface&quot;, local is faster, private, and free.
+            <strong>Local models are a daily driver, not a demo.</strong> Gemma4:26b runs on the RTX
+            3090 for quick terminal help, log summaries, API sketches, and private iteration loops.
+            Frontier models still win on hard problems — and I use them — but for the loop of
+            &quot;summarize this log, draft this commit message, sketch this API surface&quot;, local is
+            faster, private, and free.
           </p>
           <p>
             <strong>The lab is production with a smaller blast radius.</strong> Tailscale gives every
@@ -86,6 +87,12 @@ export default function LabPage() {
             without opening a port. The same skills move both directions: a CI pipeline I prototype
             against a homelab Postgres lands cleanly in a Vercel + Neon production stack the next
             week.
+          </p>
+          <p>
+            <strong>Self-hosting taught me the unglamorous parts.</strong> Immich, Jellyfin, and
+            Nextcloud are useful precisely because they force the whole operating model: volumes,
+            backups, reverse proxies, TLS, upgrades, service discovery, health checks, and the
+            boring habit of writing down the rebuild path before something breaks.
           </p>
 
           <h2>Physics &amp; astronomy</h2>

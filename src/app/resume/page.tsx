@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Section } from "@/components/shared/section";
-import { Button } from "@/components/primitives/button";
+import { Download, Mail } from "lucide-react";
 import { SITE } from "@/lib/seo";
 import { buildMetadata } from "@/lib/seo";
+import { Section } from "@/components/shared/section";
+
+const resumePdf = "/resume/Darian-Lagman-Resume.pdf";
 
 export const metadata: Metadata = buildMetadata({
   title: "Resume · Darian Lagman",
@@ -14,15 +16,29 @@ export default function ResumePage() {
   return (
     <Section eyebrow="RESUME" title="Darian Lagman.">
       <div className="mb-10 flex flex-wrap items-center gap-3">
-        <Button href="/resume/darian-lagman-resume.pdf" variant="primary" external>
-          Download PDF ↗
-        </Button>
+        <a
+          href={resumePdf}
+          download
+          className="inline-flex items-center gap-2 rounded-md border border-transparent bg-[var(--color-accent)] px-4 py-2.5 text-sm font-medium text-[var(--color-accent-contrast)] transition-colors hover:bg-[var(--color-accent-hi)]"
+        >
+          <Download className="h-4 w-4" strokeWidth={1.8} />
+          Download PDF
+        </a>
         <a
           href={`mailto:${SITE.email}`}
-          className="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hi)]"
+          className="inline-flex items-center gap-2 text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hi)]"
         >
+          <Mail className="h-4 w-4" strokeWidth={1.8} />
           {SITE.email}
         </a>
+      </div>
+
+      <div className="mb-12 overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-2xl">
+        <iframe
+          title="Darian Lagman resume PDF preview"
+          src={`${resumePdf}#toolbar=1&navpanes=0`}
+          className="h-[78vh] min-h-[640px] w-full bg-[var(--color-bg-elevated)]"
+        />
       </div>
 
       <div className="prose-darian">

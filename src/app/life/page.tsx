@@ -16,9 +16,8 @@ export default function LifePage() {
     <>
       <Section eyebrow="LIFE" title="Outside the editor.">
         <p className="max-w-[68ch] text-[17px] leading-[28px] text-[var(--color-fg-muted)]">
-          I&apos;m a better engineer when I&apos;m not engineering. The interests below aren&apos;t decoration —
-          they&apos;re the things that keep my judgement calibrated and my pattern-matching muscle in
-          shape on problems software doesn&apos;t pose.
+          Outside work I keep close to slower systems: night-sky observing, fishing, and gardening.
+          They reward patience, clean setup, and noticing small signals before making a move.
         </p>
       </Section>
 
@@ -27,7 +26,9 @@ export default function LifePage() {
           <Essay
             title="Astronomy"
             image="/media/life/banff.jpg"
-            body={`There's a reason my electives kept circling back to physics. The night sky is the original messy real-world dataset — partial observations, instrument noise, models that almost work. The N-body simulator started as a coursework assignment and became a long-running side project because the math is honest in a way most software isn't: when energy stops being conserved, you've shipped a bug.`}
+            body={`There's a reason my electives kept circling back to physics. I'm a member of RASC, and I take amateur astrophotography with a Seestar S50 whenever the sky cooperates. The night sky is the original messy real-world dataset: partial observations, instrument noise, models that almost work. The N-body simulator started as a coursework assignment and became a long-running side project because the math is honest in a way most software isn't: when energy stops being conserved, you've shipped a bug.`}
+            className="md:col-span-2"
+            imageClassName="md:aspect-[16/7] md:h-full md:object-cover"
           />
           <Essay
             title="Fishing"
@@ -55,16 +56,28 @@ export default function LifePage() {
   );
 }
 
-function Essay({ title, image, body }: { title: string; image: string; body: string }) {
+function Essay({
+  title,
+  image,
+  body,
+  className,
+  imageClassName,
+}: {
+  title: string;
+  image: string;
+  body: string;
+  className?: string;
+  imageClassName?: string;
+}) {
   return (
-    <article>
+    <article className={className}>
       <div className="overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
         <Image
           src={image}
           alt={title}
           width={800}
           height={600}
-          className="h-auto w-full object-cover"
+          className={`h-auto w-full object-cover ${imageClassName ?? ""}`}
           unoptimized
         />
       </div>

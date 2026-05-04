@@ -34,23 +34,23 @@ export default async function OpenGraphImage({
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          background: "#111318",
-          color: "#f4f1ea",
+          background: "#0d1b36",
+          color: "#ffffff",
           padding: "70px",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
           backgroundImage:
-            "radial-gradient(at 18% 0%, rgba(124,140,255,0.28), transparent 52%), radial-gradient(at 86% 82%, rgba(100,232,154,0.14), transparent 42%)",
+            "radial-gradient(at 18% 0%, rgba(59,130,246,0.30), transparent 52%), radial-gradient(at 86% 82%, rgba(34,197,94,0.16), transparent 42%)",
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ fontFamily: "ui-monospace, monospace", color: "#66e3ff", fontSize: 22 }}>
+          <div style={{ fontFamily: "ui-monospace, monospace", color: "#60a5fa", fontSize: 22 }}>
             darianlagman.ca / work
           </div>
           <div
             style={{
               fontFamily: "ui-monospace, monospace",
-              color: "#a8adb7",
-              border: "1px solid #2d3440",
+              color: "#cbd5e1",
+              border: "1px solid #2c4a86",
               borderRadius: 999,
               padding: "10px 16px",
               fontSize: 18,
@@ -62,10 +62,10 @@ export default async function OpenGraphImage({
 
         <div style={{ flex: 1 }} />
 
-        <div style={{ fontSize: 76, fontWeight: 650, lineHeight: 1.04, letterSpacing: -2, maxWidth: 940 }}>
+        <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1.04, letterSpacing: -2, maxWidth: 940 }}>
           {title}
         </div>
-        <div style={{ marginTop: 22, fontSize: 28, color: "#a8adb7", maxWidth: 930, lineHeight: 1.32 }}>
+        <div style={{ marginTop: 22, fontSize: 28, color: "#cbd5e1", maxWidth: 930, lineHeight: 1.32 }}>
           {summary}
         </div>
 
@@ -76,9 +76,9 @@ export default async function OpenGraphImage({
               style={{
                 fontFamily: "ui-monospace, monospace",
                 fontSize: 17,
-                color: "#f4f1ea",
-                background: "#181b22",
-                border: "1px solid #2d3440",
+                color: "#ffffff",
+                background: "#112347",
+                border: "1px solid #2c4a86",
                 borderRadius: 8,
                 padding: "10px 14px",
               }}
